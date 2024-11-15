@@ -1,0 +1,30 @@
+name: Build avr-gcc
+description: This action builds the avr-gcc toolchain
+branding:
+  icon: package
+  color: gray-dark
+inputs:
+  binutils_version:
+    description: Version of binutils to use
+    required: true
+    default: "2.42"
+  gcc_version:
+    description: Version of gcc to use
+    required: true
+    default: "14.1.0"
+  gdb_version:
+    description: Version of gdb to use
+    required: true
+    default: "14.2"
+
+runs:
+  using: docker
+  image: Dockerfile
+  env:
+    VER_BINUTILS: ${{ inputs.binutils_version }}
+    VER_GCC: ${{ inputs.gcc_version }}
+    VER_GDB: ${{ inputs.gdb_version }}
+    FOR_LINUX: 1
+    FOR_WINX86: 0
+    FOR_WINX64: 0
+    #JOBCOUNT: 
